@@ -12,7 +12,10 @@
             <p>내가 만약 동물로 태어난다면 무슨 동물일까?</p>
           </div>
           <div class="btn-wrap">
-            <button class="button-outline" @click="routeAllView">
+            <button
+              class="button-outline"
+              @click="$router.push({ name: 'all-view' })"
+            >
               전체 보기
             </button>
             <button class="button-main" @click="step = 'question'">
@@ -22,26 +25,9 @@
         </section>
       </template>
 
-      <template v-else>
-        <!-- 결과 -->
-        <article v-if="c_result">
-          <div class="title-wrap">
-            <h2 class="title">나의 MBTI 동물 유형은?</h2>
-          </div>
-          <h3>{{ c_result.animal }}</h3>
-          <div class="mbti">
-            <span class="pr-10">{{ c_result.explain }}</span>
-            <strong class="color-main">{{ c_result.mbti }}</strong>
-          </div>
-
-          <p>{{ c_result.features }}</p>
-          <div class="img-wrap">
-            <img :src="require(`@/assets/images/${c_result.img}`)" />
-          </div>
-        </article>
-
-        <!-- 질문 -->
-        <article v-else>
+      <!-- 질문 -->
+      <template v-if="step == 'question'">
+        <article>
           <el-progress
             :text-inside="false"
             :stroke-width="20"
@@ -67,6 +53,25 @@
             </span>
           </button>
         </article>
+      </template>
+
+      <!-- 결과 -->
+      <template v-if="step == 'result'">
+        <article v-if="c_result">
+          <div class="title-wrap">
+            <h2 class="title">나의 MBTI 동물 유형은?</h2>
+          </div>
+          <h3>{{ c_result.animal }}</h3>
+          <div class="mbti">
+            <span class="pr-10">{{ c_result.explain }}</span>
+            <strong class="color-main">{{ c_result.mbti }}</strong>
+          </div>
+
+          <p>{{ c_result.features }}</p>
+          <div class="img-wrap">
+            <img :src="require(`@/assets/images/${c_result.img}`)" />
+          </div>
+        </article>
 
         <article v-if="c_soulmate">
           <div class="title-wrap">
@@ -89,6 +94,7 @@
           <button class="button-grey" @click="$router.go('/')">다시하기</button>
         </div>
       </template>
+
       <!-- 카카오 애드핏 가로배너 -->
       <ins
         class="kakao_ad_area"
@@ -148,11 +154,6 @@ export default {
     console.log(this.GE_QESTIONS);
   },
   methods: {
-    routeAllView() {
-      this.$router.push({
-        name: "all-view",
-      });
-    },
     plusProgress() {
       this.progress_num++;
       this.progress = parseInt(100 / 12) * this.progress_num;
@@ -194,8 +195,8 @@ export default {
           }
         }
       }
-      if (this.count == 12) {
-        console.log("A 완료");
+      if (this.count >= 11) {
+        this.step = "result";
       }
     },
     resultB() {
@@ -237,8 +238,8 @@ export default {
         }
       }
 
-      if (this.count == 12) {
-        console.log("B 완료");
+      if (this.count >= 11) {
+        this.step = "result";
       }
     },
   },
