@@ -1,6 +1,7 @@
 <template>
   <div class="main">
     <div class="container">
+      <!-- 시작 -->
       <template v-if="step == 'start'">
         <section class="start-banner">
           <div class="img-wrap">
@@ -38,7 +39,7 @@
             <span class="color-grey">/12</span>
           </div>
           <div class="title-wrap">
-            <h2 class="sub-title">{{ GE_QESTIONS[0].title }}</h2>
+            <h2 class="sub-title">{{ GE_QESTIONS[count].title }}</h2>
           </div>
           <button class="button-pink" @click="resultA">
             <span class="badge badge">A</span>
