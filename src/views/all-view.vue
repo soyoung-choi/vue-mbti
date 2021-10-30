@@ -18,7 +18,7 @@
           </div>
         </li>
       </ul>
-      <button class="button-grey" @click="$router.push({ name: 'home' })">
+      <button class="button-grey" @click="$router.push({ name: 'main' })">
         뒤로가기
       </button>
     </div>
