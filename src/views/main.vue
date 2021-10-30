@@ -94,24 +94,10 @@
           <button class="button-grey" @click="$router.go('/')">다시하기</button>
         </div>
       </template>
-
-      <!-- 카카오 애드핏 가로배너 -->
-      <ins
-        class="kakao_ad_area"
-        style="display: none"
-        data-ad-unit="DAN-e2IEfwE3RIcdIzTD"
-        data-ad-width="320"
-        data-ad-height="100"
-      ></ins>
     </div>
   </div>
 </template>
 
-<script
-  type="text/javascript"
-  src="//t1.daumcdn.net/kas/static/ba.min.js"
-  async
-></script>
 <script>
 import { mapGetters } from "vuex";
 
